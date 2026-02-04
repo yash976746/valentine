@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Parrruu ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+
+    .card {
+      background: #fff;
+      width: 90%;
+      max-width: 360px;
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: #ff5f8a;
+      color: white;
+      width: 100%;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+      margin-top: 20px;
+    }
+
+    .yes {
+      background: #ff5f8a;
+      color: white;
+    }
+
+    .no {
+      background: #ddd;
+      position: absolute;
+    }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PASSWORD PAGE -->
+  <div class="card" id="lockScreen">
+    <h1>Access Restricted 🔐</h1>
+    <p>Hint: one date that means everything to us</p>
+    <input type="text" id="password" placeholder="DDMMYYYY" />
+    <button class="primary" onclick="checkPassword()">Unlock ❤️</button>
+    <p id="error" style="color:red; font-size:13px;"></p>
+  </div>
+
+  <!-- MESSAGE PAGE -->
+  <div class="card hidden" id="messageScreen">
+    <h1>Parrruu 💖</h1>
+    <p>
+      If you remember this date,<br/>
+      you already know how important you are to me.
+    </p>
+    <p>
+      Distance doesn’t change what I feel.<br/>
+      It only makes moments like this more special.
+    </p>
+    <button class="primary" onclick="showQuestion()">Continue 👉</button>
+  </div>
+
+  <!-- QUESTION PAGE -->
+  <div class="card hidden" id="questionScreen">
+    <h1>Will you be my Valentine? 🌹</h1>
+
+    <div class="buttons">
+      <button class="yes" onclick="yesClicked()">yes बाळा 💖</button>
+      <button class="no" id="noBtn">no 🙃</button>
+    </div>
+
+    <div class="footer">
+      i know you will choose yes so we will meeet on 14 ❤️
+    </div>
+  </div>
+
+  <script>
+    const SPECIAL_DATE = "DDMMYYYY"; // 🔴 CHANGE THIS
+
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      const error = document.getElementById("error");
+
+      if (input === SPECIAL_DATE) {
+        document.getElementById("lockScreen").classList.add("hidden");
+        document.getElementById("messageScreen").classList.remove("hidden");
+      } else {
+        error.innerText = "Close… but not our special day 🥺";
+      }
+    }
+
+    function showQuestion() {
+      document.getElementById("messageScreen").classList.add("hidden");
+      document.getElementById("questionScreen").classList.remove("hidden");
+    }
+
+    function yesClicked() {
+      document.body.innerHTML = `
+        <div class="card">
+          <h1>Yayyyy 💖</h1>
+          <p>
+            Guess this date just got another reason to be special.<br/><br/>
+            See you on 14 ❤️
+          </p>
+        </div>
+      `;
+    }
+
+    const noBtn = document.getElementById("noBtn");
+
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
+
+    function moveNo() {
+      const container = document.querySelector(".buttons");
+      const maxX = container.clientWidth - noBtn.clientWidth;
+      const maxY = container.clientHeight - noBtn.clientHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+  </script>
+
+</body>
+</html>
